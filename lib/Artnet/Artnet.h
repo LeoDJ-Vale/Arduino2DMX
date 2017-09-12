@@ -31,8 +31,8 @@ THE SOFTWARE.
     #include <WiFi101.h>
     #include <WiFiUdp.h>
 #else
-    #include <Ethernet.h>
-    #include <EthernetUdp.h>
+    #include <UIPEthernet.h>
+    //#include <EthernetUdp.h>
 #endif
 
 // UDP specific
@@ -50,13 +50,14 @@ class Artnet
 {
 public:
   Artnet();
-
+  void begin();
+  void begin(byte mac[]);
   void begin(byte mac[], byte ip[], byte dns[], byte gateway[], byte subnet[]);
   void begin(byte mac[], byte ip[]);
-  void begin();
+
   uint16_t read();
-  void printPacketHeader();
-  void printPacketContent();
+  //void printPacketHeader();
+  //void printPacketContent();
 
   // Return a pointer to the start of the DMX data
   inline uint8_t* getDmxFrame(void)

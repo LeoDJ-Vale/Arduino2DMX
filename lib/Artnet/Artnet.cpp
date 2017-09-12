@@ -26,6 +26,21 @@ THE SOFTWARE.
 
 Artnet::Artnet() {}
 
+
+void Artnet::begin()
+{
+  Udp.begin(ART_NET_PORT);
+}
+
+void Artnet::begin(byte mac[])
+{
+  #if !defined(ARDUINO_SAMD_ZERO)
+    Ethernet.begin(mac);
+  #endif
+
+  Udp.begin(ART_NET_PORT);
+}
+
 void Artnet::begin(byte mac[], byte ip[])
 {
   #if !defined(ARDUINO_SAMD_ZERO)
@@ -41,11 +56,6 @@ void Artnet::begin(byte mac[], byte ip[], byte dns[], byte gateway[], byte subne
     Ethernet.begin(mac, ip, dns, gateway, subnet);
   #endif
 
-  Udp.begin(ART_NET_PORT);
-}
-
-void Artnet::begin()
-{
   Udp.begin(ART_NET_PORT);
 }
 
@@ -86,7 +96,7 @@ uint16_t Artnet::read()
     return 0;
   }
 }
-
+/*
 void Artnet::printPacketHeader()
 {
   Serial.print("packet size = ");
@@ -109,3 +119,4 @@ void Artnet::printPacketContent()
   }
   Serial.println('\n');
 }
+*/
